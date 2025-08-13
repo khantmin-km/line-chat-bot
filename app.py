@@ -54,7 +54,7 @@ def handle_message(event):
 def chat_with_azure(user_input):
     try:
         response = client.chat.completions.create(
-            model=AZURE_DEPLOYMENT,
+            model=deployment,
             messages=[
                 {"role": "system", "content": "You are a helpful assistant."},
                 {"role": "user", "content": user_input}
