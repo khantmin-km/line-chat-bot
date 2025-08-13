@@ -49,12 +49,12 @@ def handle_message(event):
             TextSendMessage(text=reply_text)
         )
     except Exception as e:
-        print("❌ LINE reply error:", e)
+        app.logger.error(f"❌ LINE reply error: {e}")
 
 def chat_with_azure(user_input):
     try:
         response = client.chat.completions.create(
-            model=deployment,
+            model=AZURE_DEPLOYMENT,
             messages=[
                 {"role": "system", "content": "You are a helpful assistant."},
                 {"role": "user", "content": user_input}
@@ -64,8 +64,9 @@ def chat_with_azure(user_input):
         )
         return response.choices[0].message.content.strip()
     except Exception as e:
-        print("❌ Azure error:", e)
+        app.logger.error(f"❌ Azure error: {e}")
         return "⚠️ Error talking to Azure."
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5055)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
