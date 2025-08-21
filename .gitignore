@@ -39,4 +39,6 @@ startup.txt
 
 # Test files
 test_azure-api.ipynb
-tes-callback.py
+test-callback.py
+test-azure-api.ipynb
+test-callback.py
